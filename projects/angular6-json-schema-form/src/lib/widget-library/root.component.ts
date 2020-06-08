@@ -72,7 +72,12 @@ export class RootComponent {
       (node.options || {})[attribute] || ['1', '1', 'auto'][index];
   }
 
-  showWidget(layoutNode: any): boolean {
-    return this.jsf.evaluateCondition(layoutNode, this.dataIndex);
+  showWidget(layoutNode: any): boolean {    
+    var condition = this.jsf.evaluateCondition(layoutNode, this.dataIndex);
+    if (!condition) {
+      //this.jsf.data[layoutNode.name] = "";
+      delete this.jsf.data[layoutNode.name];
+    }
+    return condition;
   }
 }

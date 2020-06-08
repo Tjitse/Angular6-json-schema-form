@@ -83,7 +83,7 @@ export function buildFormGroupTemplate(
   const schemaType: string | string[] = JsonPointer.get(schema, '/type');
   const controlType =
     (hasOwn(schema, 'properties') || hasOwn(schema, 'additionalProperties')) &&
-      schemaType === 'object' ? 'FormGroup' :
+      schemaType === "object" ? 'FormGroup' :
       (hasOwn(schema, 'items') || hasOwn(schema, 'additionalItems')) &&
         schemaType === 'array' ? 'FormArray' :
         !schemaType && hasOwn(schema, '$ref') ? '$ref' : 'FormControl';
@@ -430,7 +430,7 @@ export function formatFormData(
 
           // If returnEmptyFields === false,
           // only add empty arrays and objects to required keys
-        } else if (schemaType === 'object' && !returnEmptyFields) {
+        } else if (schemaType === 'object' as string && !returnEmptyFields) {
           (dataMap.get(genericPointer).get('required') || []).forEach(key => {
             const keySchemaType =
               dataMap.get(`${genericPointer}/${key}`).get('schemaType');
